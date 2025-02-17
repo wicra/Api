@@ -28,8 +28,8 @@ try {
 
     // Insertion utilisateur
     $stmt = $conn->prepare("INSERT INTO users 
-        (name, email, mdp, is_admin, type_user_id, created_at) 
-        VALUES (:name, :email, :mdp, FALSE, 1, NOW())");
+        (name, email, mdp, type_user_id, created_at) 
+        VALUES (:name, :email, :mdp, 1, NOW())");
 
     $stmt->execute([
         ':name' => $data['name'],

@@ -1,6 +1,3 @@
-
-
-
 -- Création de la table type_user EN PREMIER
 CREATE TABLE type_user (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -48,5 +45,15 @@ CREATE TABLE reservations (
     date_fin DATETIME NOT NULL, 
     statut ENUM('confirmé', 'annulé', 'en attente') DEFAULT 'en attente',
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (pont_id) REFERENCES ponts(pont_id) ON DELETE CASCADE
+);
+
+CREATE TABLE capteurs (
+    capteur_id INT PRIMARY KEY AUTO_INCREMENT,
+    pont_id INT NOT NULL, 
+    niveau_eau FLOAT,
+    temperature FLOAT,
+    humidite FLOAT,
+    date_heure TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (pont_id) REFERENCES ponts(pont_id) ON DELETE CASCADE
 );

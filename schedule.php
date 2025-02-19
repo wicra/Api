@@ -11,8 +11,8 @@ $pont_id = intval($_GET['pont_id']);
 $date = $_GET['date']; // au format 'YYYY-MM-DD'
 
 try {
-    // Récupère les réservations du pont pour la journée
-    $query = "SELECT * FROM reservations WHERE pont_id = ? AND DATE(date_debut) = ?";
+    // Récupère uniquement les réservations qui ont le statut "confirmé"
+    $query = "SELECT * FROM reservations WHERE pont_id = ? AND DATE(date_debut) = ? AND statut = 'confirmé'";
     $stmt = $conn->prepare($query);
     $stmt->execute([$pont_id, $date]);
     $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -28,8 +28,6 @@ try {
 
         // Pour chaque réservation, on vérifie si l'heure correspond à la plage horaire
         foreach ($reservations as $res) {
-            // Si l'heure de début est antérieure ou égale au début du créneau et la fin est après le début du créneau
-            // OU si le début de la réservation tombe dans le créneau
             if (($res['date_debut'] <= $slotStart && $res['date_fin'] > $slotStart) ||
                 ($res['date_debut'] >= $slotStart && $res['date_debut'] < $slotEnd)) {
                 $status = "Pont ouvert";

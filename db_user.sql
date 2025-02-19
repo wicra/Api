@@ -29,7 +29,7 @@ CREATE TABLE ponts (
     pont_id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL, 
     adresse VARCHAR(255) NOT NULL, -- Adresse sous forme de texte
-    statut ENUM('ouvert', 'fermé', 'maintenance') DEFAULT 'fermé'
+    statut ENUM('ouvert', 'fermé', 'maintenance') DEFAULT 'fermé' -- peut etre supprimé
 );
 
 INSERT INTO ponts (nom, adresse, statut) VALUES 
@@ -43,7 +43,7 @@ CREATE TABLE reservations (
     pont_id INT NOT NULL, -- Le pont concerné
     date_debut DATETIME NOT NULL, 
     date_fin DATETIME NOT NULL, 
-    statut ENUM('confirmé', 'annulé', 'en attente') DEFAULT 'en attente',
+    statut ENUM('confirmé', 'annulé', 'en attente','maintenance') DEFAULT 'en attente',
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (pont_id) REFERENCES ponts(pont_id) ON DELETE CASCADE
 );

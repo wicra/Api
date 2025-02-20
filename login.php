@@ -32,7 +32,8 @@ try {
         "user" => [
             "id" => $user['id'],
             "name" => $user['name'],
-            "email" => $user['email']
+            "email" => $user['email'],
+            "type_user_id" => $user['type_user_id']
         ]
     ]);
 

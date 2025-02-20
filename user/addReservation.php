@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require '../db/db.php';
 
 // Lecture des données JSON envoyées par le client
 $data = json_decode(file_get_contents("php://input"), true);

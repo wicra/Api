@@ -29,12 +29,11 @@ CREATE TABLE ponts (
     pont_id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL, 
     adresse VARCHAR(255) NOT NULL, -- Adresse sous forme de texte
-    statut ENUM('ouvert', 'fermé', 'maintenance') DEFAULT 'fermé' -- peut etre supprimé
 );
 
-INSERT INTO ponts (nom, adresse, statut) VALUES 
-('Pont A', '12 Rue des Ponts, 59140 Dunkerque', 'ouvert'),
-('Pont B', 'Avenue du Littoral, 59240 Dunkerque', 'fermé');
+INSERT INTO ponts (nom, adresse) VALUES 
+('Pont A', '12 Rue des Ponts, 59140 Dunkerque'),
+('Pont B', 'Avenue du Littoral, 59240 Dunkerque');
 
 
 CREATE TABLE reservations (

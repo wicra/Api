@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require '../db/db.php';
 
 try {
     $stmt = $conn->query("SELECT pont_id, nom FROM ponts");

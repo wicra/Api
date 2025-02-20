@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require '../db/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !isset($_GET['pont_id']) || !isset($_GET['date'])) {
     http_response_code(400);

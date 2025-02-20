@@ -1,8 +1,9 @@
 <?php
-require 'db.php';
+require '../db/db.php';
+
+header("Content-Type: application/json");
 
 $data = json_decode(file_get_contents("php://input"), true);
-
 if (
     $_SERVER['REQUEST_METHOD'] !== 'POST' ||
     empty($data['reservation_id']) ||
@@ -18,8 +19,8 @@ $reservation_id = intval($data['reservation_id']);
 $user_id = intval($data['user_id']);
 $statut = $data['statut'];
 
-// Pour un utilisateur non admin, seuls "en attente" et "annulé" sont autorisés
-$allowed = ["en attente", "annulé", "confirmé", "maintenance"];
+// Liste des statuts autorisés
+$allowed = ["confirmé", "annulé", "en attente", "maintenance"];
 if (!in_array($statut, $allowed)) {
     http_response_code(400);
     echo json_encode(["success" => false, "message" => "Statut non autorisé"]);
@@ -30,10 +31,10 @@ try {
     $query = "UPDATE reservations SET statut = ? WHERE reservation_id = ? AND user_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->execute([$statut, $reservation_id, $user_id]);
-    echo json_encode(["success" => true, "message" => "Mise à jour effectuée"]);
+    echo json_encode(["success" => true, "message" => "Statut mis à jour"]);
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(["success" => false, "message" => $e->getMessage()]);
+    echo json_encode(["success" => false, "message" => "Erreur: " . $e->getMessage()]);
 }
 exit();
 ?>

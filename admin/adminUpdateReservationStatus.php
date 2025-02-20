@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require '../db/db.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -19,7 +19,7 @@ $user_id = intval($data['user_id']);
 $statut = $data['statut'];
 
 // Pour un utilisateur non admin, seuls "en attente" et "annulé" sont autorisés
-$allowed = ["en attente", "annulé"];
+$allowed = ["en attente", "annulé", "confirmé", "maintenance"];
 if (!in_array($statut, $allowed)) {
     http_response_code(400);
     echo json_encode(["success" => false, "message" => "Statut non autorisé"]);

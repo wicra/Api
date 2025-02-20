@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require '../db/db.php';
 
 try {
     // Récupère pour chaque pont la dernière mesure selon date_heure

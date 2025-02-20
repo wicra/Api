@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require '../db/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET' || empty($_GET['user_id'])) {
     http_response_code(400);

@@ -12,7 +12,7 @@ $date = $_GET['date']; // au format 'YYYY-MM-DD'
 
 try {
     // Récupère uniquement les réservations qui ont le statut "confirmé"
-    $query = "SELECT * FROM reservations WHERE pont_id = ? AND DATE(date_debut) = ? AND statut = 'confirmé'";
+    $query = "SELECT * FROM reservations WHERE pont_id = ? AND DATE(date_debut) = ? AND statut IN ('confirmé', 'maintenance')";
     $stmt = $conn->prepare($query);
     $stmt->execute([$pont_id, $date]);
     $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -30,7 +30,12 @@ try {
         foreach ($reservations as $res) {
             if (($res['date_debut'] <= $slotStart && $res['date_fin'] > $slotStart) ||
                 ($res['date_debut'] >= $slotStart && $res['date_debut'] < $slotEnd)) {
-                $status = "Pont ouvert";
+                
+                if ($res['statut'] === 'maintenance') {
+                    $status = "maintenance";
+                } else {
+                    $status = "Pont ouvert";
+                }
                 $reservationDetails = $res;
                 break;
             }

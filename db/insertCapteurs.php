@@ -6,7 +6,7 @@ require 'db.php';
 set_time_limit(0);
 
 // Supposons que vous ayez deux ponts; adaptez ce tableau à votre base
-$pontIds = [1, 2, 3];
+$pontIds = [1, 2, 3,4];
 
 while (true) {
     // Sélectionne aléatoirement un pont

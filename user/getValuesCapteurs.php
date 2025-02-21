@@ -1,8 +1,10 @@
 <?php
+
+// CONNEXION A LA BASE DE DONNEES
 require '../db/db.php';
 
 try {
-    // Récupère pour chaque pont la dernière mesure selon date_heure
+    // REQUETE SQL POUR RECUPERER POUR CHAQUE PONT LA DERNIÈRE MESURE SELON date_heure
     $query = "
       SELECT c.pont_id, p.nom, c.niveau_eau, c.temperature, c.humidite, c.date_heure
       FROM capteurs c
@@ -16,8 +18,11 @@ try {
     ";
     $stmt = $conn->query($query);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // SUCCÈS : RENVOIE LES VALEURS DES CAPTEURS TROUVÉES
     echo json_encode(["success" => true, "capteurs" => $data]);
 } catch(Exception $e) {
+    // ERREUR 500 : ERREUR SERVEUR
     http_response_code(500);
     echo json_encode(["success" => false, "message" => "Erreur: " . $e->getMessage()]);
 }

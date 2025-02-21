@@ -7,7 +7,6 @@ $data = json_decode(file_get_contents("php://input"), true);
 if (
     $_SERVER['REQUEST_METHOD'] !== 'POST' ||
     empty($data['reservation_id']) ||
-    empty($data['user_id']) ||
     empty($data['statut'])
 ) {
     http_response_code(400);
@@ -16,7 +15,6 @@ if (
 }
 
 $reservation_id = intval($data['reservation_id']);
-$user_id = intval($data['user_id']);
 $statut = $data['statut'];
 
 // Liste des statuts autorisés
@@ -28,9 +26,9 @@ if (!in_array($statut, $allowed)) {
 }
 
 try {
-    $query = "UPDATE reservations SET statut = ? WHERE reservation_id = ? AND user_id = ?";
+    $query = "UPDATE reservations SET statut = ? WHERE reservation_id = ?";
     $stmt = $conn->prepare($query);
-    $stmt->execute([$statut, $reservation_id, $user_id]);
+    $stmt->execute([$statut, $reservation_id]);
     echo json_encode(["success" => true, "message" => "Statut mis à jour"]);
 } catch (Exception $e) {
     http_response_code(500);

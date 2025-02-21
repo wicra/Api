@@ -28,7 +28,7 @@ CREATE TABLE users (
 CREATE TABLE ponts (
     pont_id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL, 
-    adresse VARCHAR(255) NOT NULL, -- Adresse sous forme de texte
+    adresse VARCHAR(255) NOT NULL -- Adresse sous forme de texte
 );
 
 INSERT INTO ponts (nom, adresse) VALUES 

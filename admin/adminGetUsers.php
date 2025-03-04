@@ -1,4 +1,7 @@
 <?php
+// REDIRECTION DE SECURITE
+header("Location: ../index.php");
+exit();
 
 // CONNEXION A LA BASE DE DONNEES
 require '../db/db.php';

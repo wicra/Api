@@ -1,4 +1,8 @@
 <?php
+// REDIRECTION DE SECURITE
+header("Location: ../index.php");
+exit();
+
 // DEFINIR LES HEADERS POUR L'ACCES CORS ET LE FORMAT JSON
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");

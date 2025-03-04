@@ -69,9 +69,22 @@ CREATE TABLE reservations (
     user_id INT NOT NULL,
     pont_id INT NOT NULL,
     creneau_id INT NOT NULL,
+    bateau_id INT NOT NULL,
     statut ENUM('confirmé', 'annulé', 'en attente', 'maintenance') DEFAULT 'en attente',
     date_reservation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (pont_id) REFERENCES ponts(pont_id) ON DELETE CASCADE,
-    FOREIGN KEY (creneau_id) REFERENCES creneaux(creneau_id) ON DELETE CASCADE
+    FOREIGN KEY (creneau_id) REFERENCES creneaux(creneau_id) ON DELETE CASCADE,
+    FOREIGN KEY (bateau_id) REFERENCES bateaux(bateau_id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE bateaux (
+    bateau_id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    immatriculation VARCHAR(50) NOT NULL,
+    hauteur_mat FLOAT NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
